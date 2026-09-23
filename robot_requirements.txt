@@ -1,0 +1,27 @@
+**System Requirements for Navigation Logic**
+
+1. **Input Processing**  
+   - The system must receive and process real-time input indicating whether the path **front**, **left**, and **right** are blocked.
+
+2. **Goal Direction Input**  
+   - The system must receive and process the direction of the goal relative to the robot's current orientation: **ahead**, **left**, or **right**.
+
+3. **Priority for Goal Direction**  
+   - The navigation logic must **first attempt to move in the direction of the goal** if that direction is **unblocked** (i.e., the path is clear).
+
+4. **Fallback to Alternative Directions**  
+   - If the goal's direction is **blocked**, the system must **check other available directions** (front, left, right) for unblocked paths. However, these alternative directions are **not aligned with the goal** and are considered secondary options.
+
+5. **Blocking Constraints**  
+   - The robot must **never move into a blocked direction**. If a direction is blocked, it is explicitly excluded from consideration.
+
+6. **Stop Condition**  
+   - If **all directions (front, left, right)** are blocked, the robot must **stop** and remain stationary until a path becomes available.
+
+7. **Testing and Validation**  
+   - The navigation component must be **tested in multiple simulated environments** to ensure robustness under varying conditions (e.g., dynamic obstacles, changing terrain).
+
+**Key Notes:**  
+- The robot's orientation is fixed unless explicitly stated otherwise (e.g., turning is not assumed unless part of the input).  
+- Movement decisions prioritize the goal direction unless it is blocked, after which alternative directions are considered.  
+- The system must handle edge cases, such as no available paths, by halting the robot.
