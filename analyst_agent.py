@@ -17,34 +17,27 @@ def validate_requirements(requirements):
         "avoid_obstacles"
     }
 
-    # Check that the result is a dictionary
     if not isinstance(requirements, dict):
         raise ValueError("Requirements must be a dictionary.")
 
-    # Check that there are no missing or extra keys
     if set(requirements.keys()) != required_keys:
         raise ValueError(
             "Requirements must contain exactly these keys: "
             "goal, allowed_actions, safe_stop, avoid_obstacles"
         )
 
-    # Check that goal is a string
     if not isinstance(requirements["goal"], str):
         raise ValueError("goal must be a string.")
 
-    # Check that allowed_actions is a list
     if not isinstance(requirements["allowed_actions"], list):
         raise ValueError("allowed_actions must be a list.")
 
-    # Check that safe_stop is a boolean
     if not isinstance(requirements["safe_stop"], bool):
         raise ValueError("safe_stop must be a boolean.")
 
-    # Check that avoid_obstacles is a boolean
     if not isinstance(requirements["avoid_obstacles"], bool):
         raise ValueError("avoid_obstacles must be a boolean.")
 
-    # Check that every action is valid
     for action in requirements["allowed_actions"]:
         if action not in VALID_ACTIONS:
             raise ValueError(
@@ -118,13 +111,10 @@ The output must follow exactly this structure:
         }
     )
 
-    # Get the text returned by Qwen
     json_text = response["message"]["content"]
 
-    # Convert JSON text into Python data
     requirements = json.loads(json_text)
 
-    # Validate the requirements
     validated_requirements = validate_requirements(requirements)
 
     return validated_requirements
